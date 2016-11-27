@@ -29,6 +29,21 @@ module.exports = function (grunt) {
         tasks: 'browserify:client'
       }
     },
+    babel: {
+      options: {
+        sourceMap: true,
+        presets: ['es2015-node4'],
+        plugins: ['transform-flow-strip-types']
+      },
+      server: {
+        files: [{
+          cwd: 'lib/',
+          expand: true,
+          src: '**/*.js',
+          dest: 'dist/'
+        }]
+      }
+    },
     mochaTest: {
       options: {
         require: 'babel-register',
@@ -135,7 +150,7 @@ module.exports = function (grunt) {
   grunt.loadTasks('tasks')
   require('load-grunt-tasks')(grunt)
 
-  grunt.registerTask('build', ['browserify:client'])
+  grunt.registerTask('build', ['browserify:client', 'babel:server'])
   grunt.registerTask('default', ['build', 'test', 'lint'])
   grunt.registerTask('lint', ['eslint'])
   grunt.registerTask('test-appveyor', ['test:unit', 'test:client'])

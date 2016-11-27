@@ -1,7 +1,7 @@
 var loadFile = require('mocks').loadFile
 import path from 'path'
 var helper = require('../../lib/helper')
-var logger = require('../../lib/logger.js')
+var logger = require('../../lib/logger')
 
 describe('config', () => {
   var m
